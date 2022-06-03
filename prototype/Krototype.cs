@@ -1,7 +1,6 @@
 ﻿namespace prototype
 {
-    public class Krototype //: IClone<Krototype>
-    {
+    public class Krototype : ICloneable { 
         public int CountOfWalls;
 
         public int CountOfWindows;
@@ -22,9 +21,15 @@
             Console.WriteLine("Fenster: " + this.CountOfWindows + " Wände: " + this.CountOfWalls + " Dach: " + child.TypeOfRoof);
         }
 
-        public Krototype Clone()
+        public object Clone()
         {
-            return new Krototype(this.CountOfWindows, this.CountOfWalls, this.TypeOfRoof, this.child?.Clone());
+            if (TypeOfRoof == "Satteldach")
+            {
+                throw new Exception("Ich kann Satteldaecher nicht klonen.");
+
+            }
+
+            return new Krototype(this.CountOfWindows, this.CountOfWalls, this.TypeOfRoof, (Krototype)this.child?.Clone());
         }
     }
 }
