@@ -1,31 +1,31 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// The prototype pattern is a creational design pattern in software development.
+// It is used when the type of objects to create is determined by a prototypical instance,
+// which is cloned to produce new objects.
+// This pattern is used to avoid subclasses of an object creator in the client application,
+// like the factory method pattern does
+// and to avoid the inherent cost of creating a new object in the standard way (e.g., using the 'new' keyword)
+// when it is prohibitively expensive for a given application
+// https://en.wikipedia.org/wiki/Prototype_pattern
 
 namespace prototype
 {
-    class Program
+    namespace prototype
     {
-
-        public static void Main()
+        class Program
         {
-            Krototype child = new Krototype(0,0, "SuperCooles Roof", null);
-            Krototype Haus1 = new Krototype(3, 4, "Spitzdach",child);
-            Haus1.PrintHouse();
-            var Haus2 = (Krototype)Haus1.Clone();
 
-            child.TypeOfRoof = "neues Roof";
-            Haus2.CountOfWalls = 1;
-            Haus2.PrintHouse();
+            public static void Main()
+            {
+                // IClone<House> Haus; Warum und wie Interface nutzen??
+                House Haus = new House(1, 1, "ruderdach");
+                Haus.PrintHouse();
+                House HausCopy = Haus.Clone();
+                Haus.TypeOfRoof = "StrohlolDach";
+                Haus.PrintHouse();
+                HausCopy.PrintHouse();
 
-            var Haus3 = Clone(Haus1);
+            }
 
-            Haus1.CountOfWindows = 5; Haus3.PrintHouse();
-
-        }
-
-
-        private static T Clone<T>(T objectToClone)where T : ICloneable
-        {
-            return (T)objectToClone.Clone();
         }
     }
 }
